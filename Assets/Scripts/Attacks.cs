@@ -10,13 +10,28 @@ abstract public class State : MonoBehaviour
 
 public class Attack : State
 
-   
+
 {
 
     public int damage;
+    public GameObject[] projectiles;
+    public GameObject[] mainWeapon;
     public override void NextState()
     {
-        throw new System.NotImplementedException();)
+        
+        throw new System.NotImplementedException();
     }
+
+    public void Execute()
+    {
+       
+    }
+
+    public void SpawnWeapon()
+    {
+
+    }
+    
+    
 }
 
