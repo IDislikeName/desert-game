@@ -10,23 +10,24 @@ public class IdleMovement : Movement
     }
     public override void EnterState()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("enter idle movement");
+        // throw new System.NotImplementedException();
     }
     public override void UpdateLogicState()
     {
 
-        throw new System.NotImplementedException();
+        // throw new System.NotImplementedException();
     }
 
     public override void UpdatePhysicsState()
     {
 
-        throw new System.NotImplementedException();
+        // throw new System.NotImplementedException();
     }
 
     public override void ExitState()
     {
-
-        throw new System.NotImplementedException();
+        Debug.Log("enter idle movement");
+        // throw new System.NotImplementedException();
     }
 }

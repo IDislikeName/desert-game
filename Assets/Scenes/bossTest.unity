@@ -433,8 +433,8 @@ GameObject:
   - component: {fileID: 2089634230}
   - component: {fileID: 2089634229}
   - component: {fileID: 2089634233}
-  - component: {fileID: 2089634228}
   - component: {fileID: 2089634234}
+  - component: {fileID: 2089634235}
   m_Layer: 0
   m_Name: boss
   m_TagString: Untagged
@@ -442,23 +442,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2089634228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089634227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b47a1542ca34acc4091cacc44b7d0ea3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  projectiles: []
-  mainWeapon: []
-  target: {fileID: 2139332302}
-  initialAngle: 50
 --- !u!65 &2089634229
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -565,6 +548,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7817db2df24cb884b8d1758b7f1e8501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2089634235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089634227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31517a4e640a68646b447b17da465000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: {fileID: 0}
+  leapAttackState: {fileID: 0}
+  idleMovementState: {fileID: 0}
 --- !u!1 &2139332298
 GameObject:
   m_ObjectHideFlags: 0
