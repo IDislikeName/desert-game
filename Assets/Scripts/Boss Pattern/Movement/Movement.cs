@@ -4,30 +4,5 @@ using UnityEngine;
 
 public class Movement : State
 {
-    public Movement(StateMachine stateMachine) : base(stateMachine)
-    {
-        // this.stateMachine = stateMachine;
-    }
-
-    public override void EnterState()
-    {
-        throw new System.NotImplementedException();
-    }
-    public override void UpdateLogicState()
-    {
-
-        throw new System.NotImplementedException();
-    }
-
-    public override void UpdatePhysicsState()
-    {
-
-        throw new System.NotImplementedException();
-    }
-
-    public override void ExitState()
-    {
-
-        throw new System.NotImplementedException();
-    }
+    public Movement(StateMachine stateMachine, Boss boss) : base(stateMachine, boss) { }
 }

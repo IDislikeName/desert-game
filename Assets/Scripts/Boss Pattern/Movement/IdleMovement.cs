@@ -4,30 +4,15 @@ using UnityEngine;
 
 public class IdleMovement : Movement
 {
-    public IdleMovement(StateMachine stateMachine) : base(stateMachine)
-    {
-        // this.stateMachine = stateMachine;
-    }
+    public IdleMovement(StateMachine stateMachine, Boss boss) : base(stateMachine, boss) { }
     public override void EnterState()
     {
+        base.EnterState();
         Debug.Log("enter idle movement");
-        // throw new System.NotImplementedException();
     }
-    public override void UpdateLogicState()
-    {
-
-        // throw new System.NotImplementedException();
-    }
-
-    public override void UpdatePhysicsState()
-    {
-
-        // throw new System.NotImplementedException();
-    }
-
     public override void ExitState()
     {
-        Debug.Log("enter idle movement");
-        // throw new System.NotImplementedException();
+        Debug.Log("exit idle movement"); //doesn't get called because there's no logic for it
+        base.ExitState();
     }
 }

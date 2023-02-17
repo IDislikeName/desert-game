@@ -11,35 +11,22 @@ public class LeapAttack : Attack
 
     private bool dash;
 
-    // void Start()
-    // {
-    //     // Alternative way:
-    //     // rigid.AddForce(finalVelocity * rigid.mass, ForceMode.Impulse);
-    // }
-
-    public LeapAttack(StateMachine stateMachine) : base(stateMachine)
+    public LeapAttack(StateMachine stateMachine, Boss boss) : base(stateMachine, boss)
     {
         // this.stateMachine = stateMachine;
     }
 
     public override void EnterState()
     {
+        base.EnterState();
         Debug.Log("enter leap attack");
         Jump();
-        UpdateLogicState();
     }
 
     public override void UpdateLogicState()
     {
-        // if (GetComponent<Rigidbody>().velocity == Vector3.zero)
-        // {
-        stateMachine.ChangeState(stateMachine.idleMovementState);
-        // }
-    }
-
-    public override void UpdatePhysicsState()
-    {
-
+        base.UpdateLogicState();
+        stateMachine.ChangeState(boss.idleMovementState);
     }
 
     public void Jump()
@@ -74,7 +61,8 @@ public class LeapAttack : Attack
 
     public override void ExitState()
     {
-        //CHECK MOVEMENT STATE
         Debug.Log("exit leap attack");
+        base.ExitState();
+        //CHECK MOVEMENT STATE
     }
 }

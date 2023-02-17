@@ -433,8 +433,8 @@ GameObject:
   - component: {fileID: 2089634230}
   - component: {fileID: 2089634229}
   - component: {fileID: 2089634233}
-  - component: {fileID: 2089634234}
-  - component: {fileID: 2089634235}
+  - component: {fileID: 2089634236}
+  - component: {fileID: 2089634237}
   m_Layer: 0
   m_Name: boss
   m_TagString: Untagged
@@ -536,19 +536,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2089634234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089634227}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7817db2df24cb884b8d1758b7f1e8501, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2089634235
+--- !u!114 &2089634236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -557,10 +545,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2089634227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31517a4e640a68646b447b17da465000, type: 3}
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 0}
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!114 &2089634237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089634227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aea711f1825aa449a9e436072ec8fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  _gameObject: {fileID: 0}
+  _transform: {fileID: 0}
+  _rb: {fileID: 0}
   leapAttackState: {fileID: 0}
   idleMovementState: {fileID: 0}
 --- !u!1 &2139332298
