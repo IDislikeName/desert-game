@@ -4,7 +4,9 @@ using UnityEngine;
 
 abstract public class State : MonoBehaviour
 {
-    abstract public void NextState();
+    public abstract void EnterState();
+    public abstract void UpdateState();
+    public abstract void ExitState();
 
 }
 
@@ -16,9 +18,19 @@ public class Attack : State
     public int damage;
     public GameObject[] projectiles;
     public GameObject[] mainWeapon;
-    public override void NextState()
+    public override void EnterState()
     {
         
+        throw new System.NotImplementedException();
+    }
+    public override void UpdateState()
+    {
+
+        throw new System.NotImplementedException();
+    }
+    public override void ExitState()
+    {
+
         throw new System.NotImplementedException();
     }
 
