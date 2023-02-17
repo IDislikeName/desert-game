@@ -3,14 +3,45 @@ using System.Collections;
 
 public class LeapAttack : Attack
 {
-
     [SerializeField]
     Transform target;
 
     [SerializeField]
     float initialAngle;
 
-    void Start()
+    private bool dash;
+
+    // void Start()
+    // {
+    //     // Alternative way:
+    //     // rigid.AddForce(finalVelocity * rigid.mass, ForceMode.Impulse);
+    // }
+
+    public LeapAttack(StateMachine stateMachine) : base(stateMachine)
+    {
+        // this.stateMachine = stateMachine;
+    }
+
+    public override void EnterState()
+    {
+        Debug.Log("enter leap attack");
+        Jump();
+    }
+
+    public override void UpdateLogicState()
+    {
+        if (GetComponent<Rigidbody>().velocity == Vector3.zero)
+        {
+            stateMachine.ChangeState(stateMachine.idleMovementState);
+        }
+    }
+
+    public override void UpdatePhysicsState()
+    {
+
+    }
+
+    public void Jump()
     {
         var rigid = GetComponent<Rigidbody>();
 
@@ -37,11 +68,11 @@ public class LeapAttack : Attack
         float angleBetweenObjects = Vector3.Angle(Vector3.forward, planarTarget - planarPostion);
         Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, Vector3.up) * velocity;
 
-       
         rigid.velocity = finalVelocity;
-
-        // Alternative way:
-        // rigid.AddForce(finalVelocity * rigid.mass, ForceMode.Impulse);
     }
 
+    public override void ExitState()
+    {
+        //CHECK MOVEMENT STATE
+    }
 }
