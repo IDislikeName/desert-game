@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         mainCamera.transform.position = transform.position + new Vector3(0,10.5f,-11);
         moveDirection = new Vector3(input.move.x,0,input.move.y).normalized;
         SpeedControl();
-
+        AnimationUpdate();
     }
     private void FixedUpdate()
     {
@@ -98,6 +98,17 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+    private void AnimationUpdate()
+    {
+        if (moveDirection!=Vector3.zero)
+        {
+            anim.SetBool("Running",true);
+        }
+        else
+        {
+            anim.SetBool("Running", false);
         }
     }
 }
