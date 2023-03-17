@@ -8,6 +8,7 @@ public class PlayerInputScript : MonoBehaviour
 	[Header("Character Input Values")]
 	public Vector2 move;
 	public Vector2 mouse;
+	public bool dash;
 
 
 
@@ -21,9 +22,13 @@ public class PlayerInputScript : MonoBehaviour
 	{
 		MouseInput(value.Get<Vector2>());
 	}
+	public void OnDash(InputValue value)
+    {
+		DashInput(value.isPressed);
+    }
 #endif
 
-	public void MoveInput(Vector2 newMoveDirection)
+    public void MoveInput(Vector2 newMoveDirection)
 	{
 		move = newMoveDirection;
 	}
@@ -31,6 +36,11 @@ public class PlayerInputScript : MonoBehaviour
 	public void MouseInput(Vector2 newLookDirection)
 	{
 		mouse = newLookDirection;
+	}
+
+	public void DashInput(bool newDashState)
+	{
+		dash = newDashState;
 	}
 
 	private void SetCursorState(bool newState)

@@ -15,13 +15,32 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float accelForce;
     [SerializeField]
+    float walkSpeedlimit;
+    [SerializeField]
     float moveSpeed;
     [SerializeField]
     float drag;
     [Tooltip("How fast the character turns to face movement direction")]
     [Range(0.0f, 0.3f)]
     public float rotationSmoothTime = 0.12f;
+    [Header("Dash")]
+    [SerializeField]
+    float dashForce;
+    [SerializeField]
+    float dashCoolDown;
+    [SerializeField]
+    float dashSpeedLimit;
+    [SerializeField]
+    float dashDuration;
+    bool dashing = false;
+    bool readyToDash = true;
 
+    public enum MovementState { 
+        Idle,
+        Running,
+        Dashing
+    }
+    public MovementState currentMoveState;
 
 
     //Some system variables
@@ -64,17 +83,31 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //camera
-        mainCamera.transform.position = transform.position + new Vector3(0,10.5f,-11);
-        moveDirection = new Vector3(input.move.x,0,input.move.y).normalized;
+        mainCamera.transform.position = transform.position + new Vector3(0,8.5f,-9);
+        
+        InputUpdate();
         SpeedControl();
         AnimationUpdate();
+        StateHandler();
     }
     private void FixedUpdate()
     {
         Move();
     }
+    private void InputUpdate()
+    {
+        moveDirection = new Vector3(input.move.x, 0, input.move.y).normalized;
+        if (input.dash)
+        {
+            input.dash = false;
+            if(readyToDash)
+                Dash();
+        }
+    }
     private void Move()
     {
+        if (currentMoveState == MovementState.Dashing) return;
+
         rb.AddForce(moveDirection.normalized * accelForce * 10f, ForceMode.Force);
         if (input.move != Vector2.zero)
         {
@@ -102,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void AnimationUpdate()
     {
-        if (moveDirection!=Vector3.zero)
+        if (currentMoveState ==MovementState.Running)
         {
             anim.SetBool("Running",true);
         }
@@ -110,5 +143,39 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Running", false);
         }
+    }
+
+    void StateHandler()
+    {
+        if (dashing)
+        {
+            currentMoveState = MovementState.Dashing;
+            moveSpeed = dashSpeedLimit;
+        }
+        else if (input.move!=Vector2.zero)
+        {
+            currentMoveState = MovementState.Running;
+            moveSpeed = walkSpeedlimit;
+        }
+        else
+        {
+            currentMoveState = MovementState.Idle;
+        }
+    }
+
+    void Dash()
+    {
+        readyToDash = false;
+        dashing = true;
+        rb.AddForce(transform.forward * dashForce, ForceMode.Impulse);
+        StartCoroutine(ResetDash());
+    }
+    IEnumerator ResetDash()
+    {
+        yield return new WaitForSeconds(dashDuration);
+        dashing = false;
+        
+        yield return new WaitForSeconds(dashCoolDown);
+        readyToDash = true;
     }
 }
