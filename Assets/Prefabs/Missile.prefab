@@ -53,10 +53,10 @@ MonoBehaviour:
   - Enemy
   duration: 10
   rotationSpeed: 50
-  beforeTurnSpeed: 3
-  afterTurnSpeed: 15
+  beforeTurnSpeed: 5
+  afterTurnSpeed: 13
   defaultDestinationDistance: 10
-  distanceBeforeTurn: 3
+  distanceBeforeTurn: 5
   destroyDelay: 3
 --- !u!135 &235460697053238814
 SphereCollider:
@@ -5183,7 +5183,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.9334799, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.23185539, g: 1, b: 0, a: 1}
+        key0: {r: 1, g: 0, b: 0.021312237, a: 1}
         key1: {r: 1, g: 0.84337664, b: 0, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}

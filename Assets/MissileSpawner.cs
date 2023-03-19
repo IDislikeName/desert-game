@@ -43,6 +43,7 @@ public class MissileSpawner : MonoBehaviour
         }
         else
         {
+            
             Destroy(gameObject, destroyDelay);
             ps.Stop();
             isDead = true;
@@ -56,7 +57,10 @@ public class MissileSpawner : MonoBehaviour
         var missile = Instantiate(missilePrefab, transform.position, transform.rotation);
         if (target)
         {
-            missile.GetComponent<MissileBehavior>().target = target;
+
+            var offset = new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2));
+            var destinationWithOffset = offset + target.position;
+            missile.GetComponent<MissileBehavior>().destWithOffset = destinationWithOffset;
         }
     }
 }

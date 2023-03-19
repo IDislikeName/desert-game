@@ -8,6 +8,7 @@ public class MissileBehavior : MonoBehaviour
     // Start is called before the first frame update
 
     public Transform target;
+    public Vector3 destWithOffset;
     public string[] collisionTagsToCheck;
     public float duration, rotationSpeed, beforeTurnSpeed, afterTurnSpeed, defaultDestinationDistance, distanceBeforeTurn, destroyDelay;
 
@@ -28,7 +29,7 @@ public class MissileBehavior : MonoBehaviour
 
         var rot = transform.rotation.eulerAngles;
         rot.y += 90;
-        rot.x = Random.Range(0, 360);
+        rot.x = Random.Range(-150, -210);
         transform.rotation = Quaternion.Euler(rot);
     }
 
@@ -39,10 +40,10 @@ public class MissileBehavior : MonoBehaviour
 
         if (hasTurned)
         {
-            if (target)
+            if (destWithOffset != null)
             {
-                faceDirection = target.position - transform.position;
-                goingToPosition = target.position;
+                faceDirection = destWithOffset - transform.position;
+                goingToPosition = destWithOffset;
             }
 
             rotation = Quaternion.LookRotation(faceDirection);
@@ -58,8 +59,8 @@ public class MissileBehavior : MonoBehaviour
         }
         else
         {
-            //transform.Translate(transform.forward * beforeTurnSpeed * Time.deltaTime, Space.World);
-            transform.Translate(Vector3.up * beforeTurnSpeed * Time.deltaTime, Space.World);
+            transform.Translate(transform.forward * beforeTurnSpeed * Time.deltaTime, Space.World);
+            //transform.Translate(Vector3.up * beforeTurnSpeed * Time.deltaTime, Space.World);
             distance = Vector3.Distance(transform.position, startPosition);
             if (distance > distanceBeforeTurn)
             {
