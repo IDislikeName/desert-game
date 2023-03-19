@@ -25,7 +25,8 @@ public class s_IdleMovement : s_Movement
         if (idleTime <= 0f)
         {
             idleTimeIsOver = true;
-            stateMachine.ChangeState(boss.chaseState);
+            // stateMachine.ChangeState(boss.chaseState);
+            stateMachine.ChangeState(boss.pillarState);
         }
     }
 

@@ -13,6 +13,8 @@ public class Boss : MonoBehaviour
     [HideInInspector] public s_IdleMovement idleMovementState;
     [HideInInspector] public s_Chase chaseState;
     [HideInInspector] public s_Hammer hammerState;
+    [HideInInspector] public s_Pillar pillarState;
+
 
     [Header("Movement")]
     [SerializeField]
@@ -29,12 +31,17 @@ public class Boss : MonoBehaviour
     private Vector3 moveDirection;
     private float rotationVelocity;
 
-    [Header("Triggers and other game objects the boss needs access to.")]
+    [Header("Triggers and other game objects for boss logic.")]
     public GameObject target; //TODO: Set dynamically
     [Tooltip("Where the melee hitbox is.")]
     public GameObject melee_hitbox;
 
     public LayerMask whatIsPlayer;
+
+
+    [Header("Boss weapons.")]
+    public GameObject pillarPrefab;
+    public GameObject hammerPrefab;
 
     private void Start()
     {
@@ -48,6 +55,7 @@ public class Boss : MonoBehaviour
         idleMovementState = new s_IdleMovement(stateMachine, this);
         chaseState = new s_Chase(stateMachine, this);
         hammerState = new s_Hammer(stateMachine, this);
+        pillarState = new s_Pillar(stateMachine, this, pillarPrefab);
 
         stateMachine.Initialize(idleMovementState);
     }

@@ -11,6 +11,6 @@ public class s_Attack : State
 
     public s_Attack(StateMachine stateMachine, Boss boss) : base(stateMachine, boss) { }
 
-    public virtual void SpawnWeapon() { }
+    public virtual void SpawnWeapon(GameObject weapon, Vector3 position) { }
 }
 

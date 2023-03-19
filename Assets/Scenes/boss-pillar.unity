@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19420141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.50021, y: 0.93, z: 17.001528}
+  m_LocalPosition: {x: 10.50021, y: 0, z: 17.001528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3867,6 +3867,8 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
+  pillarPrefab: {fileID: 4090758432221796393, guid: ad360f0196515b9468fd44005897aded, type: 3}
+  hammerPrefab: {fileID: 0}
 --- !u!1 &1221976415
 GameObject:
   m_ObjectHideFlags: 0
