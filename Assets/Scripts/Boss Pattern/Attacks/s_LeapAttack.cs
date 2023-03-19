@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class LeapAttack : Attack
+public class s_LeapAttack : s_Attack
 {
     [SerializeField]
     Transform target;
@@ -11,7 +11,7 @@ public class LeapAttack : Attack
 
     private bool dash;
 
-    public LeapAttack(StateMachine stateMachine, Boss boss) : base(stateMachine, boss)
+    public s_LeapAttack(StateMachine stateMachine, Boss boss) : base(stateMachine, boss)
     {
         // this.stateMachine = stateMachine;
     }
