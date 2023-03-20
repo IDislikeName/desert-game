@@ -38,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
     public enum MovementState { 
         Idle,
         Running,
-        Dashing
+        Dashing,
+        Grappling
     }
     public MovementState currentMoveState;
 
@@ -100,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         if (input.dash)
         {
             input.dash = false;
-            if(readyToDash)
+            if(readyToDash&&currentMoveState!=MovementState.Grappling)
                 Dash();
         }
     }
