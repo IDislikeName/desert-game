@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("How fast the character turns to face movement direction")]
     [Range(0.0f, 0.3f)]
     public float rotationSmoothTime = 0.12f;
+
     [Header("Dash")]
     [SerializeField]
     float dashForce;
@@ -34,6 +35,20 @@ public class PlayerMovement : MonoBehaviour
     float dashDuration;
     bool dashing = false;
     bool readyToDash = true;
+
+    [Header("Grapple")]
+    [SerializeField]
+    float grappleCoolDown;
+    bool grappling = false;
+    bool readyToGrapple = true;
+    LineRenderer line;
+    [SerializeField] LayerMask grapplableMask;
+    [SerializeField] float maxDistance = 10f;
+    [SerializeField] float grappleSpeed = 10f;
+    [SerializeField] float grappleShootSpeed = 20f;
+    public bool retracting = false;
+    Vector3 target;
+    Vector3 grappleOffset;
 
     public enum MovementState { 
         Idle,
@@ -75,21 +90,39 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         input = GetComponent<PlayerInputScript>();
+        line = GetComponent<LineRenderer>();
 #if ENABLE_INPUT_SYSTEM
         playerInput = GetComponent<PlayerInput>();
 #endif
+        grappleOffset = new Vector3(0, 1, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         //camera
-        mainCamera.transform.position = transform.position + new Vector3(0,8.5f,-9);
-        
+        mainCamera.transform.position = transform.position + new Vector3(0, 8.5f, -9);
+
         InputUpdate();
         SpeedControl();
         AnimationUpdate();
         StateHandler();
+        if (retracting)
+        {
+            Vector3 grapplePos = Vector3.Lerp(transform.position, target, grappleSpeed * Time.deltaTime);
+
+            transform.position = grapplePos;
+
+            line.SetPosition(0, transform.position+ grappleOffset);
+
+            if (Vector3.Distance(transform.position+ grappleOffset, target+ grappleOffset) < 0.5f)
+            {
+                retracting = false;
+                grappling = false;
+                line.enabled = false;
+                readyToGrapple = true;
+            }
+        }
     }
     private void FixedUpdate()
     {
@@ -104,22 +137,30 @@ public class PlayerMovement : MonoBehaviour
             if(readyToDash&&currentMoveState!=MovementState.Grappling)
                 Dash();
         }
+        if (input.grapple)
+        {
+            input.grapple = false;
+            if (readyToGrapple && currentMoveState != MovementState.Dashing)
+                Startgrapple();
+
+        }
     }
     private void Move()
     {
         if (currentMoveState == MovementState.Dashing) return;
-
+        if (currentMoveState == MovementState.Grappling) return;
         rb.AddForce(moveDirection.normalized * accelForce * 10f, ForceMode.Force);
         if (input.move != Vector2.zero)
         {
             var _targetRotation = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg +
-                              mainCamera.transform.eulerAngles.y;
+                                mainCamera.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref rotationVelocity,
                 rotationSmoothTime);
 
             // rotate to face input direction relative to camera position
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
+        
     }
     private void SpeedControl()
     {
@@ -148,7 +189,11 @@ public class PlayerMovement : MonoBehaviour
 
     void StateHandler()
     {
-        if (dashing)
+        if (grappling)
+        {
+            currentMoveState = MovementState.Grappling;
+        }
+        else if (dashing)
         {
             currentMoveState = MovementState.Dashing;
             moveSpeed = dashSpeedLimit;
@@ -178,5 +223,124 @@ public class PlayerMovement : MonoBehaviour
         
         yield return new WaitForSeconds(dashCoolDown);
         readyToDash = true;
+    }
+
+    void Startgrapple()
+    {
+        readyToGrapple = false;
+        Vector3 direction = Aim();
+        transform.forward = direction;
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + grappleOffset, transform.forward, out hit, maxDistance, grapplableMask))
+        {
+            grappling = true;
+            target = hit.point;
+            line.enabled = true;
+            line.positionCount = 2;
+
+            StartCoroutine(GrappleHit());
+        }
+        else
+        {
+            grappling = true;
+            target = transform.position+ transform.forward * maxDistance;
+            line.enabled = true;
+            line.positionCount = 2;
+            StartCoroutine(GrappleMiss());
+        }
+    }
+    IEnumerator GrappleHit()
+    {
+        float t = 0;
+        float time = 10;
+
+        line.SetPosition(0 ,transform.position+ grappleOffset);
+        line.SetPosition(1,transform.position + grappleOffset);
+
+        Vector3 newPos;
+
+        for (; t < time; t += grappleShootSpeed * Time.deltaTime)
+        {
+            newPos = Vector3.Lerp(transform.position, target, t / time);
+            line.SetPosition(0, transform.position+ grappleOffset);
+            line.SetPosition(1, newPos);
+            yield return null;
+        }
+
+        line.SetPosition(1, target);
+        retracting = true;
+    }
+    IEnumerator GrappleMiss()
+    {
+        float t = 0;
+        float time = 10;
+
+        line.SetPosition(0, transform.position + grappleOffset);
+        line.SetPosition(1, transform.position + grappleOffset);
+
+        Vector3 newPos;
+
+        for (; t < time; t += grappleShootSpeed * Time.deltaTime)
+        {
+            newPos = Vector3.Lerp(transform.position+ grappleOffset, target, t / time);
+            line.SetPosition(0, transform.position+ grappleOffset);
+            line.SetPosition(1, newPos);
+            yield return null;
+        }
+
+        line.SetPosition(1, target);
+        t = 0;
+        time = 10;
+
+        for (; t < time; t += grappleShootSpeed * Time.deltaTime)
+        {
+            newPos = Vector3.Lerp(target, transform.position+ grappleOffset, t / time);
+            line.SetPosition(0, transform.position+ grappleOffset);
+            line.SetPosition(1, newPos);
+            yield return null;
+        }
+
+        line.SetPosition(1, transform.position + grappleOffset);
+        grappling = false;
+        line.enabled = false;
+        readyToGrapple = true;
+    }
+    private Vector3 Aim()
+    {
+        var (success, position) = GetMousePosition();
+        if (success)
+        {
+            // Calculate the direction
+            Vector3 direction = position - transform.position;
+
+            // You might want to delete this line.
+            // Ignore the height difference.
+            direction.y = 0;
+
+            return direction;
+            // Make the transform look in the direction.
+            //transform.forward = direction;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
+    private (bool success, Vector3 position) GetMousePosition()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
+        {
+            // The Raycast hit something, return with the position.
+            return (success: true, position: hitInfo.point);
+        }
+        else
+        {
+            // The Raycast did not hit anything.
+            return (success: false, position: Vector3.zero);
+        }
     }
 }

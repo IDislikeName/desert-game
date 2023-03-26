@@ -9,6 +9,7 @@ public class PlayerInputScript : MonoBehaviour
 	public Vector2 move;
 	public Vector2 mouse;
 	public bool dash;
+	public bool grapple;
 
 
 
@@ -26,9 +27,13 @@ public class PlayerInputScript : MonoBehaviour
     {
 		DashInput(value.isPressed);
     }
+	public void OnGrapple(InputValue value)
+	{
+		GrappleInput(value.isPressed);
+	}
 #endif
 
-    public void MoveInput(Vector2 newMoveDirection)
+	public void MoveInput(Vector2 newMoveDirection)
 	{
 		move = newMoveDirection;
 	}
@@ -42,6 +47,11 @@ public class PlayerInputScript : MonoBehaviour
 	{
 		dash = newDashState;
 	}
+
+	public void GrappleInput(bool newGrappleState)
+    {
+		grapple = newGrappleState;
+    }
 
 	private void SetCursorState(bool newState)
 	{

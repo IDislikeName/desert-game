@@ -3096,6 +3096,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   mouse: {x: 0, y: 0}
   dash: 0
+  grapple: 0
 --- !u!114 &7476241669333658377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3117,6 +3118,8 @@ MonoBehaviour:
   dashCoolDown: 2
   dashSpeedLimit: 30
   dashDuration: 0.2
+  grappleLength: 0
+  grappleCoolDown: 0
   currentMoveState: 0
   mainCamera: {fileID: 757688864}
 --- !u!4 &7480083666094789599

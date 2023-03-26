@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1706.6667
     height: 877.3334
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 55
+  controlID: 80
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 404.66663
     height: 827.3333
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 65
+  controlID: 81
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 66
+  controlID: 82
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -399,22 +399,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\yilai\OneDrive\Desktop\UnityProjects\Desert Game\desert-game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 72700000
-    m_LastClickedID: 28786
-    m_ExpandedIDs: 00000000c06e0000c26e0000c46e000000ca9a3b
+    m_SelectedIDs: 1e6e0000
+    m_LastClickedID: 28190
+    m_ExpandedIDs: 000000001e6e0000206e0000226e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -442,7 +442,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c06e0000c26e0000c46e0000
+    m_ExpandedIDs: 000000001e6e0000206e0000226e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -533,7 +533,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 353.33325
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -570,9 +570,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 8e700000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 14edfffffaf7ffffcafaffff
+      m_ExpandedIDs: 14fbffffe86c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -588,7 +588,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 4}
+        m_ClientGUIView: {fileID: 11}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -854,9 +854,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 4.351586, y: -12.813453, z: 17.38717}
+    m_Target: {x: 1.6691403, y: -11.309332, z: 15.464283}
     speed: 2
-    m_Value: {x: 4.351586, y: -12.813453, z: 17.38717}
+    m_Value: {x: 1.6691403, y: -11.309332, z: 15.464283}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -903,13 +903,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.47895753, y: -0.09654352, z: 0.05309217, w: -0.8709028}
+    m_Target: {x: -0.37408194, y: -0.061977535, z: 0.025062403, w: -0.9249892}
     speed: 2
-    m_Value: {x: -0.4789548, y: -0.09654297, z: 0.053091865, w: -0.87089777}
+    m_Value: {x: -0.37407976, y: -0.061977174, z: 0.025062256, w: -0.9249838}
   m_Size:
-    m_Target: 6.243187
+    m_Target: 2.8990254
     speed: 2
-    m_Value: 6.537369
+    m_Value: 2.8990254
   m_Ortho:
     m_Target: 0
     speed: 2
